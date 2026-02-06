@@ -159,3 +159,71 @@
 * OSI (Open Systems Interconnection) Model
 
 * The OSI model is an essential model used in networking. This critical model provides a framework dictating how all networked devices will send, receive, and interpret data. One of the main benefits of the OSI model is that devices can have different functions and designs on a network while communicating with other devices. Data sent across a network that follows the uniformity of the OSI model can be understood by other devies. The OSI model consist of seven layers. Each layer has a different set of responsibilites and is arranges from Layer 7 to Layer 1. At every individual layer that data travels through, specific processes take place, and pieces of information are added to this data.
+
+<img width="1077" height="800" alt="image" src="https://github.com/user-attachments/assets/8ca3ceec-3718-40c0-83bd-90ab95eeee32" />
+
+* Layer 1 - Physical: This layer references  the physical components of the hardware used in networking and is the lowest layer that you will find. Devices use electircal signals to transfer data between each other in a binary numbering system (1's and 0's).
+
+* Layer 2 - Data Link: The data link layer focuses on the physical addressing of the transmission. It receives a packet from the network layer (including the IP address for the remote computer) and adds in the physical MAC (Media Access Control) address of the receiving endpoint. Inside every network-enabled computer is a Network Interface Card (NIC) which comes with a unique MAC address to identify it. MAC addresses are set by the manufacturer and literally burnt into the card; they can't be changed - although they can be spoofed.
+
+* Layer 3 - Network: The third layer of the OSI model (network layer) is where the magic of routing & re-assembly of data takes place (from these small chunks to the larger chunk). Firstly, routing simply determines the most optimal path in which these chunks of data should be sent. Some protocols at this layer determine exactly what is the "optimal" path that data should take to reach a device. OSPF (Open Shortest Path First) and RIP (Routing Information Protocol). At this layer, everythign is dealt with via IP addresses. Devices such as routers capable of delivering packets using IP addresses are known as Layer 3 devices - becaus they are capable of working at the third layer of the OSI model.  
+
+* Layer 4 - Transport: Layer 4 of the OSI model plays a vital part in transmitting data across a network and can be a little bit difficult to grasp. When data is sent between devices, it follows one of two different protocols that are decided upon several factors: TCP or UDP.
+    * Transmission Control Protocol (TCP) is designed with reliability and guarantee in mind. This protocol reserves a constant connection between the two devies for the amount of time it takes for the data to be sent and received. Not only this, but TCP incorporates error checking into its design. Error checking is how TCP can guarantee htat data is sent from the small chunks in the session layer (Layer 5) has been received and reassembled in the same order. TCP is used for situations such as file sharing, internet browsing or sending an email. This usage is because services require the data to be accurate and complete.
+    * User Datagram Protocol (UDP) is not nearly as advances as the TCP protocol. It doesn't boast the many features offered by TCP, such as error checking and reliability. In fact, any data that gets sent via UDP is sent to the computer whether it gets there or not. There is no synchronization between the two devices or guarantee; just hope for the best, and fingers crossed. UDP is useful in situations where there are small pieces of data being sent. For example, protocols used for discovering devices (ARP & DHCP) or larger files such as video streaming (where it is oky if some part of hte vidwo is pixelated).
+
+ * Layer 5 - Session: Once data has been correctly translated or formatted from the presentation layer (Layer 6), the session layer (Layer 5) will begin to create and maintain the connection to other computer which the data is destined. When a connection is established, a session is created. Whils this conneciton is active, so is the session. Teh session layer is also responsible for closing the connection if it hasn't been used in a while or if it is lost. What is worth of noting is that sessions are unique - meaining that data cannot travel over different sessions, but in fact, only accross each session instead.
+
+ * Layer 6 - Presentation: Layer 6 of the OSI model is the layer in which standardization starts to take place. Because software developers can develop any software such as an email client differently, the data still needs to be handled in the same way - no matter how the software works. This layer acts as a translator for data to and from the application layer (Layer 7). Security features such as data encryption (like HTTPS) occur at this layer.
+
+ * Layer 7 - Application: The application layer of the OSI model is the layer that you will be most familiar with. This familiarity is because the application layer is the layer in which protocols and rules are in place to determine how the user should interact with data sent or received. Everyday applications such as email clients, browsers, or file server browing software such as FileZilla proved a friendly, Graphical User Interface (GUI) for users to interact with data sent or received. Other protocols include DNS (Domain Name System), which is how website addresses are translated into IP addresses.
+
+## Packets & Frames
+
+* A packet is a piece of data from Layer 3 (Network Layer) of the OSI model, containing information such as an IP header and payload.
+
+* A frame, however, is used at Layer 2 (Data Link) of the OSI model, which, encapsulates the packet and adds additional information such as MAC addresses.
+
+* A packet using the Internet Protocol will have a set of headers that contain additional pieces of information to the data that is being sent across a network. Some notable headers include:
+   * Time to Live - This field sets an expiry timer for the packet to not clog up your network if it never manages to reach a host or escape!
+   * Checksum - This field provides integrity checking for protocols such as TCP/IP. If any data is changed, this value will be different from what was expected and therefore corrupt.
+   * Source Address - The IP address of the device that the packet is being sent from so that data knows where to return to.
+   * Destination Address - The device's IP address the packet is being sent to so that data knows where to travel next.
+
+ * TCP/IP protocol conists of four layers and is arguably just a summarized version of the OSI model. These layers are: 1) Application, 2) Transport, 3) Internet, and 4) Network Interface.
+
+ * Very similar to how the OSI model works, information is added ot each layer of the TCP model as the piece of data (or packet) traverses it.
+
+ * TCP guarantees that any data sent will be received on the other end. This process is named the three-way handshake.
+
+ * TCP packets contain various sections of information known as headers that are added from encapsulation.
+     * Source Port - This value is the port opened by the sender to send the TCP packet from. This value is chosen randomly (out of the ports from 0 - 65535 that aren't already in use at that time).
+     * Destination Port - This value is the port nubmer that an application or service is running on the remote host (the one receiving data); for example a webserver running on port 80. Unlike the source port, this value is not chosen at random.
+     * Source IP - This is the IP address of the device that is sending the packet.
+     * Destination IP - This is the IP address of the device that the packet is destined for.
+     * Sequence Number - When a connection occurs, the first piece of data transmitted is given a random number.
+     * Acknowledgement Number - After a piece of data has been given a sequence number, the number for the next piece of data will have the sequence number +1.
+     * Checksum - This value is what gives TCP integrity. A mathematical calculation is made where the output is remembered. When the receiving device performs the mathematical calculation, the data must be corrupt if the output is different from what was sent.
+     * Data - This header is where the data, i.e. bytes of a file that is being transmitted is stored.
+     * Flag - This header determines how the packet should be handled by either device during the handshake process. Specific flags will determine specific behaviours.
+  
+* Thre-way handshake - the term given for the process used to establish a connection between two devices. The Three-way handshake communicates using a few special messages. Below are some of the main ones:
+   * 1 - SYN - A SYN message is the initial packet sent by a client during the handshake. This packet is used to initiate a conneciton and synchronize the two devices together.
+   * 2 - SYN/ACK - This packet is sent by the receiving device (server) to acknowledge the synchronization attempt from the client.
+   * 3 - ACK - The acknowledgement packet can be used by either the client or server to acknowledge that a series of messages/packets have been successfully recieved.
+   * 4 - DATA - Once a connection has been established, data (such as bytes of a file) is sent via the "DATA" message.
+   * 5 - FIN - This packet is used ot cleanly (properly) close the conneciton after it has been complete.
+   * \# - RST - This packet abruptly ends all communication. This is the last resport and indicates there was a problem during the process. For example, if the service or application is not working correctly, or the system has faults such as low resources.
+ 
+<img width="981" height="949" alt="image" src="https://github.com/user-attachments/assets/03011fab-cd5b-41b4-a796-9e803d623793" />
+
+*  Any sent data is given a random number sequence and is reconstructed using this number sequence and incrementing by 1. Both computers must agree on the same number sequence for data to be sent in the correct order. This order is agreed upon during three steps.
+   * 1 - SYN - Client: Here's my Initial Sequence Number (ISN) to SYNchronize with (0).
+   * 2 - SYN/ACK - Server: Here's my Initial Sequence Number (ISN) to SYNchronize with (5,000), and I ACKnowledge your initial number sequence (0).
+   * 3 - ACK - Client: I ACKnowledge your Initial Sequence Number (ISN) of (5,000), here is some data that is in my ISN+1 (0+1).
+ 
+* TCP Closing a Connection - First, TCP will close a connection once a device has determined that the other device has successfullly received all of the data. To initiate the closure of a TCP connection, the device will send a "FIN" packet to the other device. Of course, with TCP, the other device will also have to acknowledge this packet.   
+
+<img width="981" height="949" alt="image" src="https://github.com/user-attachments/assets/ed939f8f-41a5-4f8f-ab27-ccc9ac1ac8c4" />
+
+
